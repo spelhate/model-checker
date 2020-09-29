@@ -1,0 +1,12 @@
+.view.bloc-content {
+    border-style: solid;
+}
+
+.view.bloc-content:after {
+    content: 'bloc';                    
+    background-color: black;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+}
