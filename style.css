@@ -2,6 +2,11 @@
     border-style: solid;
 }
 
+.dataviz-container {
+    border-style: dotted;
+    border-color: red;
+}
+
 .view.bloc-content:after {
     content: 'bloc';                    
     background-color: black;

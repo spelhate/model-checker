@@ -41,12 +41,11 @@ var _parseTemplate = function (html) {
 
 var _clear = function () {
     $("#palette span").remove();
-    $("#view")[0].innerHTML = "";
+    $("#view").html("");
 
 }
 
-var applyModel = function () {
-    _clear();
+var applyModel = function () {    
     var model = document.querySelector("#selector select").value;
     if (!templates[model]) {
         $.ajax({
@@ -80,6 +79,7 @@ var _initDatavizContainer = function (id, type, tpl) {
 }
 
 var _load = function (tplId) {
+    _clear();
     var tpl = templates[tplId];
     $("#view").append(tpl.style);
     $("#view").append(tpl.page);
@@ -106,6 +106,7 @@ var _load = function (tplId) {
     //1 image
     var id = 'image-0';
     var img = _initDatavizContainer(id, "image", tpl);
+    $("#" + id + " img").remove();
     $("#" + id).append('<img src="https://kartenn.region-bretagne.fr/img/vn/ecluse/ECL_V02.jpg" class="img-fluid">');
     //tableau
 
@@ -114,6 +115,8 @@ var _load = function (tplId) {
 
     var id = 'tableau-0';
     var tab = _initDatavizContainer(id, "table", tpl);
+    //Hack duplicates dataviz
+    $("#" + id + " table").remove();
     $("#" + id).append(tableau);
 
     //3 graphiques
@@ -122,6 +125,8 @@ var _load = function (tplId) {
     ["a","b", "c"].forEach(function(l) {
         var id = 'chart-' + l;
         var dvz = _initDatavizContainer(id, "chart", tpl);
+        //Hack duplicates dataviz
+        $("#" + id + " canvas").remove();
         $("#" + id).prepend('<canvas id="' + id + '-canvas" width="400" height="200"></canvas>');
         var ctx = document.getElementById(id + "-canvas").getContext('2d');
         var myChart = new Chart(ctx, {
