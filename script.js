@@ -1,4 +1,5 @@
 var templates = {};
+
 var _parseTemplate = function (html) {
     var id = $(html)[0].id;
     // get data- linked to the template
@@ -26,7 +27,6 @@ var _parseTemplate = function (html) {
         dataviz_components[component] = $.trim(element.outerHTML);
     });
 
-    //Populate _HTMLTemplates with object
     templates[id] = {
         id: id,
         parameters: parameters,
@@ -36,38 +36,48 @@ var _parseTemplate = function (html) {
         dataviz_components: dataviz_components
     };
 
-
-
 }
 
 
 var _clear = function () {
     $("#palette span").remove();
     $("#view")[0].innerHTML = "";
-    
+
 }
 
 var applyModel = function () {
     _clear();
-    var model = document.querySelector("#selector select").value; 
-    $.ajax({
-        url: model + ".html",
-        dataType: "text",
-        success: function (html) {
-            //Template parsing
-            _parseTemplate(html);
-            _load(model);
+    var model = document.querySelector("#selector select").value;
+    if (!templates[model]) {
+        $.ajax({
+            url: model + ".html",
+            dataType: "text",
+            success: function (html) {
+                //Template parsing
+                _parseTemplate(html);
+                _load(model);
 
-        },
-        error: function (xhr, status, err) {
-            alert("Erreur avec le fichier " +  model + ".html " + err);
-        }
-    });
-    
+            },
+            error: function (xhr, status, err) {
+                alert("Erreur avec le fichier " +  model + ".html " + err);
+            }
+        });
+    } else {
+        _load(model);
+    }
+
+
 };
 
 
-
+var _initDatavizContainer = function (id, type, tpl) {
+    // Create in DOM dataviz element structure based on model dataviz components
+    var dvz = tpl.dataviz_components[type].replace('{{dataviz}}', id);
+    var container = $(".dataviz-container:not(.configured)").first();
+    container.append(dvz);
+    container.addClass("configured");
+    return container;
+}
 
 var _load = function (tplId) {
     var tpl = templates[tplId];
@@ -83,12 +93,9 @@ var _load = function (tplId) {
         counter += 1;
         var desc = "Texte descriptif";
         var id = 'figure-' + counter;
-        var dvz = tpl.dataviz_components.figure.replace('{{dataviz}}', id);
-        var container = $(".dataviz-container:not(.configured)").first();
-        container.append(dvz);
+        var container = _initDatavizContainer(id, "figure", tpl);
         $("#" + id).find(".report-figure-chiffre").text(v);
         $("#" + id).find(".report-figure-caption").text(desc);
-        container.addClass("configured");
         if (counter === 2) {
             $("#" + id).addClass("custom-icon-left");
         } else if (counter === 3) {
@@ -97,36 +104,24 @@ var _load = function (tplId) {
     });
 
     //1 image
-
     var id = 'image-0';
-    var dvz = tpl.dataviz_components.image.replace('{{dataviz}}', id);
-    var container = $(".dataviz-container:not(.configured)").first();
-    container.append(dvz);
+    var img = _initDatavizContainer(id, "image", tpl);
     $("#" + id).append('<img src="https://kartenn.region-bretagne.fr/img/vn/ecluse/ECL_V02.jpg" class="img-fluid">');
-    container.addClass("configured");
-
-
     //tableau
 
 
     var tableau = '<table class="table table-bordered"><thead class="thead-light"><tr><th scope="col">Nom</th><th scope="col">Secteur</th></tr></thead><tbody><tr><td>LYCEE JEAN MACE</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DE LA PAIX</td><td>Privé</td></tr><tr><td>LYCEE COLBERT</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DU VOEU</td><td>Privé</td></tr><tr><td>LYCEE DUPUY DE LOME</td><td>Public</td></tr><tr><td>LYCEE VICTOR HUGO</td><td>Public</td></tr><tr><td>LP EMILE ZOLA</td><td>Public</td></tr></tbody></table>';
 
     var id = 'tableau-0';
-    var dvz = tpl.dataviz_components.table.replace('{{dataviz}}', id);
-    var container = $(".dataviz-container:not(.configured)").first();
-    container.append(dvz);
+    var tab = _initDatavizContainer(id, "table", tpl);
     $("#" + id).append(tableau);
-    container.addClass("configured");
-
 
     //3 graphiques
 
     const data = [12, 19, 3, 5, 2, 3, 20, 3, 5, 6, 2, 1] ;
     ["a","b", "c"].forEach(function(l) {
         var id = 'chart-' + l;
-        var dvz = tpl.dataviz_components.chart.replace('{{dataviz}}', id);
-        var container = $(".dataviz-container:not(.configured)").first();
-        container.append(dvz);
+        var dvz = _initDatavizContainer(id, "chart", tpl);
         $("#" + id).prepend('<canvas id="' + id + '-canvas" width="400" height="200"></canvas>');
         var ctx = document.getElementById(id + "-canvas").getContext('2d');
         var myChart = new Chart(ctx, {
@@ -158,7 +153,6 @@ var _load = function (tplId) {
             }
           }
         });
-        container.addClass("configured");
     });
 
 
