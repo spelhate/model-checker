@@ -29,8 +29,9 @@ li.form-check {
 }
 
 .dataviz-container.delimited {
-    border-style: dashed;
-    border-color: red;
+    outline: dashed 1px red;
+    outline-offset: -10px;
+    margin: 10px;
 }
 .dataviz-container.delimited:after {
     content: 'dataviz-container';
