@@ -59,9 +59,10 @@ var toggleContainers = function () {
 
 var applyModel = function () {
     var model = document.querySelector("#selector").value;
+    var dc = Date.parse(new Date());
     if (!templates[model]) {
         $.ajax({
-            url: model + ".html",
+            url: model + ".html?dc=" + dc,
             dataType: "text",
             success: function (html) {
                 //Template parsing
@@ -114,6 +115,15 @@ var _load = function (tplId) {
     //Title
     _initDatavizContainer("titre-0", "title", tpl);
     $("#titre-0").text(_data.title);
+
+    //free-text titre-n
+    $("#free-text").html("");
+    $("#free-text").append('<div class="titleBloc"><p>Free text (normal)</p></div>');
+    [1,2,3,4].forEach(function (i) {
+        $("#free-text").append(`<div class="titleBloc"><p class="titre-${i}">Free text (titre-${i})</p></div>`);
+    });
+
+
     // chiffres clés
     var counter = 0;
     _data.figure.forEach(function(figure) {
@@ -154,7 +164,7 @@ var _load = function (tplId) {
           data: {
             labels:chart.label,
             datasets: [{
-              label: '# dataset',
+              label: 'Légende',
               data: chart.data,
               backgroundColor: tpl.parameters.colors,
               borderWidth: 1
@@ -162,20 +172,7 @@ var _load = function (tplId) {
           },
           options: {
             responsive: true,
-            maintainAspectRatio: true,
-            scales: {
-              xAxes: [{
-                ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
+            maintainAspectRatio: true
           }
         });
     });
