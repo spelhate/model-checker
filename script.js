@@ -47,8 +47,13 @@ var _clear = function () {
 
 }
 
+var toggleContainers = function () {
+    //var checked = document.getElementById("showContainers").checked;
+    $(".bloc-content,.dataviz-container").toggleClass("delimited");
+}
+
 var applyModel = function () {
-    var model = document.querySelector("#selector select").value;
+    var model = document.querySelector("#selector").value;
     if (!templates[model]) {
         $.ajax({
             url: model + ".html",
