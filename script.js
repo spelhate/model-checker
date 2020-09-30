@@ -22,6 +22,10 @@ var _parseTemplate = function (html) {
         var bloc = $(template).prop('content').firstElementChild;
        blocs.push(bloc);
     });
+    var title;
+    $(html).find("template.report-bloc-title").each(function (id, template) {
+        title = $(template).prop('content').firstElementChild;
+    });
 
     var dataviz_components = {};
     ["figure", "chart", "table", "title", "text", "iframe", "image", "map"].forEach(function (component) {
@@ -34,6 +38,7 @@ var _parseTemplate = function (html) {
         parameters: parameters,
         style: style,
         page: page,
+        title: title,
         blocs: blocs,
         dataviz_components: dataviz_components
     };
@@ -79,10 +84,14 @@ var applyModel = function () {
 var _initDatavizContainer = function (id, type, tpl) {
     // Create in DOM dataviz element structure based on model dataviz components
     var dvz = tpl.dataviz_components[type].replace('{{dataviz}}', id);
-    var container = $(".dataviz-container:not(.configured)").first();
+    var container;
+    if (type === "title") {
+        container = $(".report-bloc-title .dataviz-container:not(.configured)").first();
+    } else {
+        container = $(".report-bloc .dataviz-container:not(.configured)").first();
+    }
     container.append(dvz);
     container.addClass("configured");
-    return container;
 }
 
 var _load = function (tplId) {
@@ -91,13 +100,24 @@ var _load = function (tplId) {
     $("#view").append(tpl.style);
     $("#view").append(tpl.page);
     _loadColors(tpl.parameters.colors);
+    $(".container.report").append(tpl.title);
     tpl.blocs.forEach(function(bloc) {
         $(".container.report").append(bloc);
     })
+    // Set bloc description as text value
+    document.querySelectorAll(".bloc-title").forEach(function(title) {
+        if (title.parentElement.dataset["modelTitle"]) {
+            title.textContent = "BLOC " + title.parentElement.dataset["modelTitle"];
+        }
+
+    });
+    //Title
+    _initDatavizContainer("titre-0", "title", tpl);
+    $("#titre-0").text(_data.title);
     // chiffres clés
     var counter = 0;
     _data.figure.forEach(function(figure) {
-        var container = _initDatavizContainer(figure.id, "figure", tpl);
+        _initDatavizContainer(figure.id, "figure", tpl);
         $("#" + figure.id).find(".report-figure-chiffre").text(figure.data);
         $("#" + figure.id).find(".report-figure-caption").text(figure.label);
         if (figure.iconposition === "left") {
