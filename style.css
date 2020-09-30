@@ -1,15 +1,35 @@
+
+/* NAVBAR */
 li.form-check {
     left: 20px;
     color: white;
 }
 
+
+/* PALETTE COULEUR*/
+#palette {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#palette .pal-color {
+    margin-left: 10px;
+}
+
+#palette:not(:empty):before {
+    content: 'Palette de couleurs : ';
+}
+
+/* DELIMITED BLOC */
 .bloc-content.delimited,
 .report-bloc-title.delimited{
-    border-style: solid;
+    outline: dashed 2px black;
+    outline-offset: 5px;
 }
 
 .dataviz-container.delimited {
-    border-style: dotted;
+    border-style: dashed;
     border-color: red;
 }
 .dataviz-container.delimited:after {
@@ -19,22 +39,23 @@ li.form-check {
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 2px;
+    font-size: x-small;
 }
 
-.view.bloc-content.delimited:after {
-    content: 'bloc-content';
+.bloc-content.delimited:after,
+.report-bloc-title.delimited:after {
     background-color: black;
     color: white;
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 2px;
+    font-size: x-small;
+}
+
+.bloc-content.delimited:after {
+    content: 'bloc-content';
 }
 
 .report-bloc-title.delimited:after {
     content: 'report-bloc-title';
-    background-color: black;
-    color: white;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 2px;
 }
