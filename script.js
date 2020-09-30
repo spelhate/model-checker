@@ -198,6 +198,10 @@ var _loadData = function () {
         dataType: "json",
         success: function (data) {
             _data = data;
+            // add model to selector
+            _data.models.forEach(function(model) {
+                $("#selector").append(`<option value="${model}">${model}</option>`);
+            });
         },
         error: function (xhr, status, err) {
             alert("Erreur avec le fichier data.json " + err);
