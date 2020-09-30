@@ -1,5 +1,7 @@
 var templates = {};
 
+var _data;
+
 var _parseTemplate = function (html) {
     var id = $(html)[0].id;
     // get data- linked to the template
@@ -45,7 +47,7 @@ var _clear = function () {
 
 }
 
-var applyModel = function () {    
+var applyModel = function () {
     var model = document.querySelector("#selector select").value;
     if (!templates[model]) {
         $.ajax({
@@ -87,32 +89,28 @@ var _load = function (tplId) {
     tpl.blocs.forEach(function(bloc) {
         $(".container.report").append(bloc);
     })
-    // 4 chiffres clés
+    // chiffres clés
     var counter = 0;
-    [456789, 123, 7894, 17].forEach(function(v) {
-        counter += 1;
-        var desc = "Texte descriptif";
-        var id = 'figure-' + counter;
-        var container = _initDatavizContainer(id, "figure", tpl);
-        $("#" + id).find(".report-figure-chiffre").text(v);
-        $("#" + id).find(".report-figure-caption").text(desc);
-        if (counter === 2) {
-            $("#" + id).addClass("custom-icon-left");
-        } else if (counter === 3) {
-            $("#" + id).addClass("custom-icon-right");
+    _data.figure.forEach(function(figure) {
+        var container = _initDatavizContainer(figure.id, "figure", tpl);
+        $("#" + figure.id).find(".report-figure-chiffre").text(figure.data);
+        $("#" + figure.id).find(".report-figure-caption").text(figure.label);
+        if (figure.iconposition === "left") {
+            $("#" + figure.id).addClass("custom-icon-left");
+        } else if (figure.iconposition === "right") {
+            $("#" + figure.id).addClass("custom-icon-right");
         }
     });
 
-    //1 image
-    var id = 'image-0';
-    var img = _initDatavizContainer(id, "image", tpl);
-    $("#" + id + " img").remove();
-    $("#" + id).append('<img src="https://kartenn.region-bretagne.fr/img/vn/ecluse/ECL_V02.jpg" class="img-fluid">');
+    // images
+    _data.image.forEach(function(image) {
+        var img = _initDatavizContainer(image.id, "image", tpl);
+        $("#" + image.id + " img").remove();
+        $("#" + image.id).append('<img src="'+ image.data +'" class="img-fluid">');
+    });
+
     //tableau
-
-
     var tableau = '<table class="table table-bordered"><thead class="thead-light"><tr><th scope="col">Nom</th><th scope="col">Secteur</th></tr></thead><tbody><tr><td>LYCEE JEAN MACE</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DE LA PAIX</td><td>Privé</td></tr><tr><td>LYCEE COLBERT</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DU VOEU</td><td>Privé</td></tr><tr><td>LYCEE DUPUY DE LOME</td><td>Public</td></tr><tr><td>LYCEE VICTOR HUGO</td><td>Public</td></tr><tr><td>LP EMILE ZOLA</td><td>Public</td></tr></tbody></table>';
-
     var id = 'tableau-0';
     var tab = _initDatavizContainer(id, "table", tpl);
     //Hack duplicates dataviz
@@ -120,22 +118,19 @@ var _load = function (tplId) {
     $("#" + id).append(tableau);
 
     //3 graphiques
-
-    const data = [12, 19, 3, 5, 2, 3, 20, 3, 5, 6, 2, 1] ;
-    ["a","b", "c"].forEach(function(l) {
-        var id = 'chart-' + l;
-        var dvz = _initDatavizContainer(id, "chart", tpl);
+    _data.chart.forEach(function(chart) {
+        var dvz = _initDatavizContainer(chart.id, "chart", tpl);
         //Hack duplicates dataviz
-        $("#" + id + " canvas").remove();
-        $("#" + id).prepend('<canvas id="' + id + '-canvas" width="400" height="200"></canvas>');
-        var ctx = document.getElementById(id + "-canvas").getContext('2d');
+        $("#" + chart.id + " canvas").remove();
+        $("#" + chart.id).prepend('<canvas id="' + chart.id + '-canvas" width="400" height="200"></canvas>');
+        var ctx = document.getElementById(chart.id + "-canvas").getContext('2d');
         var myChart = new Chart(ctx, {
-          type: 'bar',
+          type: chart.type,
           data: {
-            labels: ["2015-01", "2015-02", "2015-03", "2015-04", "2015-05", "2015-06", "2015-07", "2015-08", "2015-09", "2015-10", "2015-11", "2015-12"],
+            labels:chart.label,
             datasets: [{
-              label: '# of Tomatoes',
-              data: data.sort(() => Math.random() - 0.5),
+              label: '# dataset',
+              data: chart.data,
               backgroundColor: tpl.parameters.colors,
               borderWidth: 1
             }]
@@ -161,9 +156,6 @@ var _load = function (tplId) {
     });
 
 
-
-
-
 };
 
 
@@ -178,3 +170,19 @@ var palette = [];
 
 };
 
+var _loadData = function () {
+    $.ajax({
+        url: "data.json",
+        dataType: "json",
+        success: function (data) {
+            _data = data;
+        },
+        error: function (xhr, status, err) {
+            alert("Erreur avec le fichier data.json " + err);
+        }
+    });
+}
+
+$( document ).ready(function() {
+    _loadData();
+});
