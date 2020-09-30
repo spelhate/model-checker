@@ -54,7 +54,7 @@ var _clear = function () {
 
 var toggleContainers = function () {
     //var checked = document.getElementById("showContainers").checked;
-    $(".bloc-content,.dataviz-container").toggleClass("delimited");
+    $(".bloc-content,.report-bloc-title,.dataviz-container").toggleClass("delimited");
 }
 
 var applyModel = function () {
