@@ -144,6 +144,14 @@ var _load = function (tplId) {
         $("#" + image.id).append('<img src="'+ image.data +'" class="img-fluid">');
     });
 
+    // textes
+    _data.text.forEach(function(text) {
+        _initDatavizContainer(text.id, "text", tpl);
+        $("#" + text.id + " .report-text-title").text(text.label);
+        $("#" + text.id + " .report-text-text").html(text.data);
+
+    });
+
     //tableau
     var tableau = '<table class="table table-bordered"><thead class="thead-light"><tr><th scope="col">Nom</th><th scope="col">Secteur</th></tr></thead><tbody><tr><td>LYCEE JEAN MACE</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DE LA PAIX</td><td>Privé</td></tr><tr><td>LYCEE COLBERT</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DU VOEU</td><td>Privé</td></tr><tr><td>LYCEE DUPUY DE LOME</td><td>Public</td></tr><tr><td>LYCEE VICTOR HUGO</td><td>Public</td></tr><tr><td>LP EMILE ZOLA</td><td>Public</td></tr></tbody></table>';
     var id = 'tableau-0';

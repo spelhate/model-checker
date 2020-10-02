@@ -319,6 +319,64 @@
     flex-direction: column;
     width: 100%;
 }
+/* FROM MREPORT.CSS */
+.editable-text {
+    margin-bottom: 0 !important;
+}
+.report-chart,
+.report-figure {
+    padding-top: 20px;
+}
+.report-chart {
+    width: 100%;
+    height: 100%;
+}
+.full-width{
+    width: 100%;
+}
+div[class*="list-group-item"]{
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+div[class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+.view,
+.lyrow{
+    height: 100%;
+}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+    height: 100%;
+}
+.view .row .col-md-12{
+    height: 100%;
+}
+.dataviz-container:hover .report-share{
+    display: block;
+}
+.no-data{
+    text-align: center;
+}
+.report-chart-title,
+.report-chart-summary{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.report-chart-title{
+    margin-top: 15px;
+    text-align: center;
+}
+.report-chart-summary{
+    margin-bottom: 5px;
+    text-align: justify;
+}
+.report-figure-chiffre {
+    padding-top: 30px;
+
+}
 /* DATAVIZ FIGURE */
 .report-figure-chiffre {
     padding-top: 30px;
@@ -355,9 +413,64 @@
 .icon-default {
     background-image: url(village.svg);
 }
+/* Icon & text used with empty dataviz */
+.model-b div.dataviz-container:empty {
+    min-height: 100px;
+    background-image: url(/static/picto/black/travaux.svg);
+    background-repeat: no-repeat;
+    background-size: 75px;
+    background-position-x: center;
+    background-position-y: center;
+}
+
+.model-b div.dataviz-container:empty:after {
+    content: "En construction";
+    text-align: center;
+    padding-left: 180px;
+}
 
 /* IMPRESSION */
+.printButton{
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background-color: #eee;
+    color: #555;
+    padding: 10px;
+    border-radius: 35px;
+    box-shadow: 0 0 5px #ccc;
+    font-size: 24px;
+    text-align: center;
+}
+
+.icon-print:before{
+    margin: 0 auto;
+}
+
+.printButton:hover{
+    background-color:#555;
+    color:#eee;
+}
 @media print {
+    @page {
+    size: A4 portrait;
+    -webkit-print-color-adjust: exact !important;   /* Chrome, Safari */
+    color-adjust: exact !important;
+
+  }
+  canvas {
+        min-height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        height: auto!important;
+        width: auto!important;
+    }
+
+    .printButton{
+        display: none !important;
+    }
     .lyrow {
         page-break-inside: avoid;
     }
