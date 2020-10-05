@@ -33,6 +33,18 @@ var _parseTemplate = function (html) {
         dataviz_components[component] = $.trim(element.outerHTML);
     });
 
+
+    var extra_elements = {};
+    $(html).find("template.report-element").each(function (id, template) {
+        var extra = $(template).prop('content').firstElementChild;
+        if (extra.classList.contains("report-chart-summary")) {
+            extra_elements["description"] = $.trim(extra.outerHTML);
+        } else if (extra.classList.contains("report-chart-title")) {
+            extra_elements["title"] = $.trim(extra.outerHTML);
+        }
+
+    });
+
     templates[id] = {
         id: id,
         parameters: parameters,
@@ -40,7 +52,8 @@ var _parseTemplate = function (html) {
         page: page,
         title: title,
         blocs: blocs,
-        dataviz_components: dataviz_components
+        dataviz_components: dataviz_components,
+        extra_elements: extra_elements
     };
 
 }
@@ -182,9 +195,22 @@ var _load = function (tplId) {
 
     //3 graphiques
     _data.chart.forEach(function(chart) {
-        var dvz = _initDatavizContainer(chart.id, "chart", tpl);
+        _initDatavizContainer(chart.id, "chart", tpl);
         //Hack duplicates dataviz
         $("#" + chart.id + " canvas").remove();
+        //Add title and description
+        if (chart.title) {
+            //$("#" + chart.id).parent().prepend(`<div class="report-chart-title" >${chart.title}</p></div>`);
+            let title = $(tpl.extra_elements.title).text(chart.title)
+            $("#" + chart.id).parent().prepend(title);
+        }
+        if (chart.description) {
+            //$("#" + chart.id).parent().append(`<div class="report-chart-summary mt-auto"><p>${chart.description}</p></div>`);
+            let description = $(tpl.extra_elements.description).text(chart.description)
+            $("#" + chart.id).parent().append(description);
+        }
+
+        //Add canvas
         $("#" + chart.id).prepend('<canvas id="' + chart.id + '-canvas" width="400" height="200"></canvas>');
         var ctx = document.getElementById(chart.id + "-canvas").getContext('2d');
         var myChart = new Chart(ctx, {
