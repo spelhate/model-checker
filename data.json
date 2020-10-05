@@ -1,5 +1,6 @@
 {   "models": ["model-b"],
     "title": "Titre du rapport",
+    "reportType": "Type du report",
     "figure": [
         {
             "id": "figure-1",
@@ -23,7 +24,7 @@
             "id": "figure-4",
             "data": "17",
             "label": "Description 4",
-            "iconposition": "center"
+            "iconposition": "left"
 
         },
         {

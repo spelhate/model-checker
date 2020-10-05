@@ -1,9 +1,0 @@
-<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32">
-  <defs>
-    <symbol id="village" data-name="village" viewBox="0 0 21.98 15.737">
-      <path d="M21.9804,15.73682H0V9.68159L1.1532,8.2908H5.25361L6.3048,8.28962v-2.328L9.5088,0l3.14159,5.96162V8.184l4.07521.10679H20.826L21.9804,9.68159ZM1.2863,12.53328H2.49589V10.71167H1.2863ZM7.5455,7.81487H8.7551V5.99326H7.5455Zm5.0868,4.71841h1.20959V10.71167H12.6323Zm5.418,0h1.20959V10.71167H18.0503Z"/>
-    </symbol>
-  </defs>
-  <title>village</title>
-  <use width="21.9804" height="15.73682" transform="translate(4.36694 9.06231)" xlink:href="#village"/>
-</svg>

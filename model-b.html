@@ -1,4 +1,4 @@
-<div id="model-b" data-colors="#005a66,#0094ab,#b0252e,#cf7a26,#e3c213,#9fb935,#2f476c,#b0006b,#555555,#999999">
+<div id="model-b" data-colors="#00525f,#006878,#0094ab,#00d6f8,#681215,#781000,#a91d22,#dd363c,#474747,#666666,#858585,#a3a3a3">
     <!-- REQUERY template report is the main report div -->
     <template class="report">
         <div class="container-fluid model-b">
@@ -16,7 +16,7 @@
     <template class="report-bloc" id="b4-4-4_2">
         <div class="lyrow report-bloc b4-4-4_2" data-model-title="3 colonnes(4)" data-model-description="33%/33%/33%">
             <!-- REQUERY bloc-title, editable-text means that is editable in composer -->
-            <h4 class="bloc-title editable-text">Titre du bloc
+            <h4 class="bloc-title editable-text titre-1 ">Titre du bloc
                 <!-- this text is editable in composer -->
             </h4>
             <!-- REQUERY bloc-content -->
@@ -66,7 +66,7 @@
     <!-- REQUERY (n) template report-bloc is a report bloc -->
     <template class="report-bloc" id="b4-4-4">
         <div class="lyrow report-bloc b4-4-4" data-model-title="3 colonnes" data-model-description="33%/33%/33%">
-            <h4 class="bloc-title editable-text">Titre du bloc
+            <h4 class="bloc-title editable-text titre-1 ">Titre du bloc
                 <!-- this text is editable in composer -->
             </h4>
             <div class="view bloc-content">
@@ -98,7 +98,7 @@
     <!-- REQUERY (n) template report-bloc is a report bloc -->
     <template class="report-bloc" id="b12">
         <div class="lyrow report-bloc b12" data-model-title="1 colonne" data-model-description="100%">
-            <h4 class="bloc-title editable-text">
+            <h4 class="bloc-title editable-text titre-1 ">
                 Titre du bloc
                 <!-- this text is editable in composer -->
             </h4>
@@ -125,7 +125,7 @@
     <!-- REQUERY (n) template report-bloc is a report bloc -->
     <template class="report-bloc" id="b6-6">
         <div class="lyrow report-bloc b6-6" data-model-title="2 colonnes" data-model-description="50%/50%">
-            <h4 class="bloc-title editable-text">
+            <h4 class="bloc-title editable-text titre-1 ">
                 Titre du bloc
                 <!-- this text is editable in composer -->
             </h4>
@@ -230,53 +230,71 @@
 /* Couleur de fond de la page*/
 .model-b {
     background-color: #f5f5f5;
+    padding:15px;
 }
 /* Font */
 .report {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: 'Open Sans', sans-serif;
 }
 /* Eléments structurants */
 /* titre du rapport */
+.report-bloc-title{
+  padding:30px 0;
+}
 .report-title {
-    font-size: 2em;
+    font-size: 30px;
+    text-align:center;
 }
 /* titre des blocs */
 .bloc-title {
     font-weight: 700;
     padding-top: 15px;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 0.2px;
     color: #213042;
 }
 /* sources des blocs */
 .bloc-sources {
     font-size: 12px;
+    margin-top:30px;
 }
-.bloc-sources p {
-    padding-left: 20px;
+
+.bloc-sources .col{
+    padding:0;
 }
+
+.bloc-sources p{
+    color:#0094ab;
+    font-size:12px;
+}
+
 /* Texte libre */
 .free-text,
 .titleBloc {
     font-size: 12px;
 }
 /* titre-n can be used with .bloc-title, .bloc-sources, .free-text */
+#titre-0{
+  font-size: 30px;
+  font-weight: 700;
+  color:#0094ab;
+}
 .titre-1 {
-    font-size: 2em;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
 }
 .titre-2 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
-
+    font-style:italic;
 }
 .titre-3 {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
 }
 .titre-4 {
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 500;
 }
 /* DATAVIZ CONTAINERS*/
 .customBaseColumn {
@@ -289,6 +307,10 @@
     display: flex;
     height: 100%;
     justify-content: center;
+    margin:15px;
+    border-radius:0;
+    border:none;
+    box-shadow:0 0 5px #ddd;
 }
 .dataviz-container .card-body {
     display: flex;
@@ -296,6 +318,13 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
+    min-height:100px;
+}
+.card-body .report-figure{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 }
 /* FROM MREPORT.CSS */
 .editable-text {
@@ -357,39 +386,75 @@ div[class*='col-'] {
 }
 /* DATAVIZ FIGURE */
 .report-figure-chiffre {
-    padding-top: 30px;
-    color:#0094ab;
+    color:#ab1700;
     font-size: 40px;
     font-weight: 900;
-    text-align: center;
+    text-align: left;
 }
 .report-figure-caption {
-    color:#0094ab;
-    font-size: 13px;
-    font-weight: 600;
+    color:#000000;
+    font-size: 15px;
+    font-weight: 500;
     line-height: 1;
-    text-align: center;
+    text-align: left;
 }
 .custom-icon {
     background-repeat: no-repeat;
     background-position: center;
     background-position-y: top;
-    background-size: 75px 45px;
 }
 .custom-icon-left {
-    width: 100%;
-    background-position:left;
-    background-size: 100px 75px;
-    background-position-x: 2em;
+    left:0;
 }
-.custom-icon-right {
-    width: 100%;
-    background-position:right;
-    background-size: 100px 75px;
+
+.custom-icon-left .report-figure-chiffre{
+    margin-left: 50px;
 }
+
+.custom-icon-right .report-figure-chiffre{
+    margin-right: 50px;
+}
+
 /* used to test custom-icon in model-checker" */
-.icon-default {
-    background-image: url(village.svg);
+
+.icon-default::before {
+    content: " ";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: -1;
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-image: url(globe-people.svg);
+    left: 50%;
+    top: -40px;
+    transform: translateX(-50%);
+}
+
+.icon-default.custom-icon-right::before{
+    left: unset;
+    right: 0px;
+    top: 0;
+    transform: none;
+}
+
+.icon-default.custom-icon-left::before{
+  left:0px;
+  top:0;
+  transform: none;
+}
+
+/*Margin around blocs*/
+.verticalDivision .dataviz-container{
+  margin: 0 10px;
+}
+
+.verticalDivision:first-child{
+  margin-top:15px
+}
+
+.verticalDivision:last-child{
+  margin-top:15px;
 }
 /* Icon & text used with empty dataviz */
 .model-b div.dataviz-container:empty {
