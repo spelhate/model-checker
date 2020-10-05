@@ -1,4 +1,4 @@
-{   "models": ["model-b"],
+{   "models": ["model-a", "model-b"],
     "title": "Titre du rapport",
     "reportType": "Type du report",
     "figure": [

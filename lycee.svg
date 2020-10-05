@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Calque_1"
+   data-name="Calque 1"
+   viewBox="0 0 32 32"
+   version="1.1"
+   sodipodi:docname="lycee.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1019"
+     inkscape:window-height="480"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="7.375"
+     inkscape:cx="15.661017"
+     inkscape:cy="16"
+     inkscape:window-x="870"
+     inkscape:window-y="204"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Calque_1" />
+  <defs
+     id="defs5">
+    <symbol
+       id="lycee"
+       data-name="lycee"
+       viewBox="0 0 20.743 16.219"
+       style="fill:#0094ab;fill-opacity:1">
+      <path
+         d="M20.7432,2.51158H13.98V.6924h.4908V0H6.0816V.6924h.68159V2.51158H0V16.21919H20.7432Zm-1.8036,5.124H17.3628V4.338h1.5768Zm0,6.12239H17.3628V10.46041h1.5768ZM16.4604,7.63561H14.88359V4.338H16.4604Zm0,6.12239H14.88359V10.46041H16.4604ZM12.89519,9.80281h-2.226V2.51158h2.226Zm0,5.088H7.812V11.2812h5.08319ZM7.812,2.51158h2.226V9.80281H7.812Zm-1.95121,5.124H4.284V4.338H5.86079Zm0,6.12239H4.284V10.46041H5.86079ZM3.3816,7.63561H1.8048V4.338H3.3816Zm0,6.12239H1.8048V10.46041H3.3816Z"
+         id="path2" />
+    </symbol>
+  </defs>
+  <title
+     id="title7">lycee</title>
+  <use
+     width="20.7432"
+     height="16.219191"
+     transform="matrix(1.4462431,0,0,1.4462431,1.0000002,4.2714164)"
+     xlink:href="#lycee"
+     id="use9"
+     x="0"
+     y="0" />
+</svg>
