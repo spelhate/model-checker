@@ -175,7 +175,9 @@
     <!-- REQUERY chart component -->
     <template class="report-component report-chart">
         <div class="report-component.chart full-width">
-            <div id="{{dataviz}}" class="dataviz report-chart"></div>
+            <div class="report-chart-title" ><p class="editable-text">Titre</p></div>
+            <div id="{{dataviz}}" data-model-title="Titre" class="dataviz report-chart"></div>
+            <div class="report-chart-summary mt-auto" data-model-title="Description"><p class="editable-text">Description</p></div>
         </div>
     </template>
 
@@ -307,7 +309,6 @@
 }
 .report-chart {
     width: 100%;
-    height: 100%;
 }
 .full-width{
     width: 100%;
@@ -346,10 +347,13 @@ div[class*='col-'] {
 .report-chart-title{
     margin-top: 15px;
     text-align: center;
+    color: #0094ab;
+    font-weight: 600;
 }
 .report-chart-summary{
     margin-bottom: 5px;
     text-align: justify;
+    font-size: smaller;
 }
 .report-figure-chiffre {
     padding-top: 30px;
