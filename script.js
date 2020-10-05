@@ -84,14 +84,24 @@ var applyModel = function () {
 
 var _initDatavizContainer = function (id, type, tpl) {
     // Create in DOM dataviz element structure based on model dataviz components
-    var dvz = tpl.dataviz_components[type].replace('{{dataviz}}', id);
     var container;
     if (type === "title") {
         container = $(".report-bloc-title .dataviz-container:not(.configured)").first();
-    } else {
+    } else  {
+        //Get first "free" dataviz container if exists
         container = $(".report-bloc .dataviz-container:not(.configured)").first();
+        if (container.length === 0) {
+            //Insert new random dataviz container bloc if no exists
+            let rnd = Math.floor(Math.random() * tpl.blocs.length);
+            let nbloc = tpl.blocs[rnd];
+            $(".container.report").append(nbloc.cloneNode(true));
+            container = $(".report-bloc .dataviz-container:not(.configured)").first();
+        }
     }
-    container.append(dvz);
+    if (type) {
+        var dvz = tpl.dataviz_components[type].replace('{{dataviz}}', id);
+        container.append(dvz);
+    }
     container.addClass("configured");
 }
 
@@ -103,7 +113,7 @@ var _load = function (tplId) {
     _loadColors(tpl.parameters.colors);
     $(".container.report").append(tpl.title);
     tpl.blocs.forEach(function(bloc) {
-        $(".container.report").append(bloc);
+        $(".container.report").append(bloc.cloneNode(true));
     })
     // Set bloc description as text value
     document.querySelectorAll(".bloc-title").forEach(function(title) {
@@ -139,9 +149,16 @@ var _load = function (tplId) {
 
     // images
     _data.image.forEach(function(image) {
-        var img = _initDatavizContainer(image.id, "image", tpl);
+        _initDatavizContainer(image.id, "image", tpl);
         $("#" + image.id + " img").remove();
         $("#" + image.id).append('<img src="'+ image.data +'" class="img-fluid">');
+    });
+
+     // images
+     _data.iframe.forEach(function(iframe) {
+        _initDatavizContainer(iframe.id, "iframe", tpl);
+        $("#" + iframe.id + " iframe").remove();
+        $("#" + iframe.id).append('<iframe class="embed-responsive-item" src="' + iframe.data + '"></iframe>');
     });
 
     // textes
@@ -151,6 +168,9 @@ var _load = function (tplId) {
         $("#" + text.id + " .report-text-text").html(text.data);
 
     });
+
+    // Empty bloc
+        _initDatavizContainer(null, null, tpl);
 
     //tableau
     var tableau = '<table class="table table-bordered"><thead class="thead-light"><tr><th scope="col">Nom</th><th scope="col">Secteur</th></tr></thead><tbody><tr><td>LYCEE JEAN MACE</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DE LA PAIX</td><td>Privé</td></tr><tr><td>LYCEE COLBERT</td><td>Public</td></tr><tr><td>LYCEE NOTRE DAME DU VOEU</td><td>Privé</td></tr><tr><td>LYCEE DUPUY DE LOME</td><td>Public</td></tr><tr><td>LYCEE VICTOR HUGO</td><td>Public</td></tr><tr><td>LP EMILE ZOLA</td><td>Public</td></tr></tbody></table>';

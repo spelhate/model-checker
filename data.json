@@ -25,12 +25,31 @@
             "label": "Description 4",
             "iconposition": "center"
 
+        },
+        {
+            "id": "figure-5",
+            "data": "7894",
+            "label": "Description 3",
+            "iconposition": "right"
+        },
+        {
+            "id": "figure-6",
+            "data": "17",
+            "label": "Description 4",
+            "iconposition": "center"
+
         }
     ],
     "image": [
         {
             "id": "image-1",
             "data": "https://kartenn.region-bretagne.fr/img/vn/ecluse/ECL_V02.jpg"
+        }
+    ],
+    "iframe": [
+        {
+            "id": "iframe-1",
+            "data": "https://kartenn.region-bretagne.fr/sviewer/"
         }
     ],
     "chart": [
