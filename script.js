@@ -2,6 +2,20 @@ var templates = {};
 
 var _data;
 
+var parseWKT = function (wkt) {
+    var lonlat = [0, 0];
+    // find data beetween ()
+    //var regExp = /\(([^)]+)\)/;
+    // regex get all numeric values
+    var a = /[-+]?\d+(?:\.\d*)?/gi
+    if (wkt.match(a)) {
+        lonlat = wkt.match(a).map(Number);
+        console.log(lonlat);
+    }
+    return lonlat;
+};
+
+
 var _parseTemplate = function (html) {
     var id = $(html)[0].id;
     // get data- linked to the template
@@ -167,6 +181,28 @@ var _load = function (tplId) {
         $("#" + image.id).append('<img src="'+ image.data +'" class="img-fluid">');
     });
 
+    //maps
+    _data.map.forEach(function(map) {
+        _initDatavizContainer(map.id, "map", tpl);
+        $("#" + map.id).append(`<div id="${map.id}-map" style="width:auto;height:300px;"><div>`);
+        var _map = L.map(map.id + "-map");
+        _map.zoomControl.remove();
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(_map);
+        let point = parseWKT(map.data).reverse();
+        let icon = L.divIcon({
+            className: 'map-marker-circle-1',
+            iconSize: [30, 30]
+        });
+        var marker = L.marker(point, {
+            icon: icon
+        }).addTo(_map).bindPopup(map.label);
+        _map.setView(point, 8);
+
+    });
+
+
      // images
      _data.iframe.forEach(function(iframe) {
         _initDatavizContainer(iframe.id, "iframe", tpl);
@@ -211,7 +247,16 @@ var _load = function (tplId) {
         }
 
         //Add canvas
-        $("#" + chart.id).prepend('<canvas id="' + chart.id + '-canvas" width="400" height="200"></canvas>');
+        let chart_width = 200;
+        let chart_height = 200;
+        if (chart.format) {
+            let format = chart.format.split(":");
+            let w = parseInt(format[0]);
+            let h = parseInt(format[1]);
+            chart_width = chart_width * w;
+            chart_height = chart_height * h;
+        }
+        $("#" + chart.id).prepend(`<canvas id="${chart.id}-canvas" width="${chart_width}" height="${chart_height}"></canvas>`);
         var ctx = document.getElementById(chart.id + "-canvas").getContext('2d');
         var myChart = new Chart(ctx, {
           type: chart.type,
