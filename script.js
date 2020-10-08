@@ -236,14 +236,14 @@ var _load = function (tplId) {
         $("#" + chart.id + " canvas").remove();
         //Add title and description
         if (chart.title) {
-            //$("#" + chart.id).parent().prepend(`<div class="report-chart-title" >${chart.title}</p></div>`);
-            let title = $(tpl.extra_elements.title).text(chart.title)
-            $("#" + chart.id).parent().prepend(title);
+            $("#" + chart.id).parent().find(".report-dataviz-title").text(chart.title);
+        } else {
+            $("#" + chart.id).parent().find(".report-dataviz-title").text("");
         }
         if (chart.description) {
-            //$("#" + chart.id).parent().append(`<div class="report-chart-summary mt-auto"><p>${chart.description}</p></div>`);
-            let description = $(tpl.extra_elements.description).text(chart.description)
-            $("#" + chart.id).parent().append(description);
+            $("#" + chart.id).parent().find(".report-dataviz-description").text(chart.description);
+        } else {
+            $("#" + chart.id).parent().find(".report-dataviz-description").text("");
         }
 
         //Add canvas

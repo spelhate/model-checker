@@ -85,7 +85,7 @@
             "type": "pie",
             "title": "Titre",
             "format": "2:1",
-            "description": "Description",
+            "description": "Description2",
             "data": [15, 50, 35],
             "label": ["Catégorie A", "Catégorie B", "Catégorie C"]
         }

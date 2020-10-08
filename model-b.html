@@ -175,14 +175,18 @@
     <!-- REQUERY chart component -->
     <template class="report-component report-chart">
         <div class="report-component.chart full-width">
+            <div class="report-dataviz-title" >Titre</div>
             <div id="{{dataviz}}" class="dataviz report-chart"></div>
+            <div class="report-dataviz-description mt-auto">Description</div>
         </div>
     </template>
 
     <!-- REQUERY table component -->
     <template class="report-component report-table">
-        <div class="report-component.chart card-body">
+        <div class="report-component.table card-body">
+            <div class="report-dataviz-title" >Titre</div>
             <div id="{{dataviz}}" class="dataviz report-table"></div>
+            <div class="report-dataviz-description mt-auto">Description</div>
         </div>
     </template>
     <!-- REQUERY text component -->
@@ -214,13 +218,7 @@
             <div id="{{dataviz}}" class="dataviz report-iframe .hidden-md-down embed-responsive embed-responsive-16by9">
             </div>
         </div>
-    </template>
-    <template class="report-element">
-        <div class="report-chart-title"><p>Titre</p></div>
-    </template>
-    <template class="report-element">
-        <div class="report-chart-summary mt-auto"><p>Description</p></div>
-    </template>
+    </template>    
     <!-- STYLE USED BY this TEMPLATE -->
     <style>
 /* Couleur de fond de la page*/
@@ -333,18 +331,18 @@ div[class*='col-'] {
 .no-data{
     text-align: center;
 }
-.report-chart-title,
-.report-chart-summary{
+.report-dataviz-title,
+.report-dataviz-description{
     margin-right: 15px;
     margin-left: 15px;
 }
-.report-chart-title{
+.report-dataviz-title{
     margin-top: 15px;
     text-align: center;
     color: #0094ab;
     font-weight: 600;
 }
-.report-chart-summary{
+.report-dataviz-description{
     margin-bottom: 5px;
     text-align: justify;
     font-size: smaller;
