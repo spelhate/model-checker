@@ -30,7 +30,7 @@ var _parseTemplate = function (html) {
     }
     //get main template div
     var page = $(html).find("template.report").get(0).content.firstElementChild.outerHTML;
-    //get all report-bloc and report-bloc-title
+    //get all report-bloc and report-bloc-title + report-bloc-subtitle
     var blocs = []
     $(html).find("template.report-bloc").each(function (id, template) {
         var bloc = $(template).prop('content').firstElementChild;
@@ -41,8 +41,13 @@ var _parseTemplate = function (html) {
         title = $(template).prop('content').firstElementChild;
     });
 
+    var subtitle;
+      $(html).find("template.report-bloc-subtitle").each(function (id, template) {
+          subtitle = $(template).prop('content').firstElementChild;
+      });
+
     var dataviz_components = {};
-    ["figure", "chart", "table", "title", "text", "iframe", "image", "map"].forEach(function (component) {
+    ["figure", "chart", "table", "title", "subtitle",  "text", "iframe", "image", "map"].forEach(function (component) {
         var element = $(html).find("template.report-component.report-" + component).prop('content').firstElementChild;
         dataviz_components[component] = $.trim(element.outerHTML);
     });
@@ -65,6 +70,7 @@ var _parseTemplate = function (html) {
         style: style,
         page: page,
         title: title,
+        subtitle: subtitle,
         blocs: blocs,
         dataviz_components: dataviz_components,
         extra_elements: extra_elements
@@ -81,7 +87,7 @@ var _clear = function () {
 
 var toggleContainers = function () {
     //var checked = document.getElementById("showContainers").checked;
-    $(".bloc-content,.report-bloc-title,.dataviz-container").toggleClass("delimited");
+    $(".bloc-content,.report-bloc-title,.report-bloc-subtitle,.dataviz-container").toggleClass("delimited");
 }
 
 var applyModel = function () {
@@ -114,6 +120,8 @@ var _initDatavizContainer = function (id, type, tpl) {
     var container;
     if (type === "title") {
         container = $(".report-bloc-title .dataviz-container:not(.configured)").first();
+    } else if(type === "subtitle"){
+        container = $(".report-bloc-subtitle .dataviz-container:not(.configured)").first();
     } else  {
         //Get first "free" dataviz container if exists
         container = $(".report-bloc .dataviz-container:not(.configured)").first();
@@ -139,6 +147,7 @@ var _load = function (tplId) {
     $("#view").append(tpl.page);
     _loadColors(tpl.parameters.colors);
     $(".container.report").append(tpl.title);
+    $(".container.report").append(tpl.subtitle);
     tpl.blocs.forEach(function(bloc) {
         $(".container.report").append(bloc.cloneNode(true));
     })
@@ -152,6 +161,11 @@ var _load = function (tplId) {
     //Title
     _initDatavizContainer("titre-0", "title", tpl);
     $("#titre-0").text(_data.title);
+
+    //subtitle
+    _initDatavizContainer("sous-titre-0", "subtitle", tpl);
+    $("#sous-titre-0").text(_data.subtitle);
+
 
     //free-text titre-n
     $("#free-text").html("");

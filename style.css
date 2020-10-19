@@ -22,7 +22,8 @@ li.form-check {
 
 /* DELIMITED BLOC */
 .bloc-content.delimited,
-.report-bloc-title.delimited{
+.report-bloc-title.delimited,
+.report-bloc-subtitle.delimited{
     outline: dashed 2px black;
     outline-offset: 5px;
 }
@@ -43,7 +44,8 @@ li.form-check {
 }
 
 .bloc-content.delimited:after,
-.report-bloc-title.delimited:after {
+.report-bloc-title.delimited:after,
+.report-bloc-subtitle.delimited:after {
     background-color: black;
     color: white;
     padding-left: 10px;
@@ -58,4 +60,8 @@ li.form-check {
 
 .report-bloc-title.delimited:after {
     content: 'report-bloc-title';
+}
+
+.report-bloc-subtitle.delimited:after {
+    content: 'report-bloc-subtitle';
 }
