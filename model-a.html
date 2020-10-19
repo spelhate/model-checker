@@ -7,10 +7,10 @@
             <div class="container report">
               <div class="interaction-icons">
 <div class="printButton">
-  <img alt="print button" src="print.svg">
+  <a href="#"><img alt="print button" src="print.svg"></a>
 </div>
 <div class="shareButton">
-  <img alt="share button" src="share.svg">
+  <a href="#"><img alt="share button" src="share.svg"></a>
 </div>
                 
                 
@@ -194,7 +194,7 @@
     <!-- REQUERY subtitle component -->
     <template class="report-component report-subtitle">
         <div class="report-componenet.subtitle ">
-            <img id="subtitle-icon" src="chiffres-cles.svg">
+            <img id="subtitle-icon" src="model-a-icons/chiffres-cles.svg">
             <h2 id="{{dataviz}}" class="dataviz report-subtitle"></h2>
         </div>
     </template>
@@ -265,8 +265,12 @@
     background-color: #f5f5f5;
     padding:30px 15px;
 }
+#palette .pal-color{
+  color:white;
+}
 /* Font */
-.report {
+.report,
+#free-text {
     font-family: 'Open Sans', sans-serif;
 }
 /* Eléments structurants */
@@ -455,7 +459,7 @@ div[class*='col-'] {
     color:#ab1700;
     font-size: 40px;
     font-weight: 900;
-    text-align: left;
+    text-align: center;
 }
 .report-figure-caption {
     color:#000000;
@@ -486,14 +490,14 @@ div[class*='col-'] {
 .icon-default::before {
     content: " ";
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     z-index: -1;
-    background-size: 50px;
+    background-size: 40px;
     background-repeat: no-repeat;
-    background-image: url(globe-people.svg);
+    background-image: url(model-a-icons/globe-people.svg);
     left: 50%;
-    top: -40px;
+    top: -20px;
     transform: translateX(-50%);
 }
 
@@ -530,7 +534,7 @@ div[class*='col-'] {
 /* Icon & text used with empty dataviz */
 .model-a div.dataviz-container:empty {
     min-height: 100px;
-    background-image: url(construction.svg);
+    background-image: url(model-a-icons/construction.svg);
     background-repeat: no-repeat;
     background-size: 75px;
     background-position-x: center;
@@ -540,7 +544,7 @@ div[class*='col-'] {
 .model-a div.dataviz-container:empty:after {
     content: "En construction";
     text-align: center;
-    padding-top:80px;
+    padding-top:100px;
     font-weight:600;
     font-size:14px;
     color:#bf2126;
@@ -590,8 +594,9 @@ color:#f5f5f5;
 
 .printButton:hover,
 .shareButton:hover{
-    background-color:#555;
+    background-color:#93191e;
     color:#eee;
+    cursor:pointer
 }
 
 @media print {
