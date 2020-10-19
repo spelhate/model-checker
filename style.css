@@ -14,10 +14,12 @@ li.form-check {
 
 #palette .pal-color {
     margin-left: 10px;
+  padding:2px 5px;
 }
 
 #palette:not(:empty):before {
     content: 'Palette de couleurs : ';
+    padding:5px;
 }
 
 /* DELIMITED BLOC */
