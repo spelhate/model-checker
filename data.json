@@ -1,4 +1,4 @@
-{   "models": ["model-a", "model-b","model-c"],
+{   "models": ["model-a", "model-b","model-c","model-d","model-e","model-f"],
     "title": "Titre du rapport",
     "subtitle":"Sous titre du rapport",
     "reportType": "Type du report",
