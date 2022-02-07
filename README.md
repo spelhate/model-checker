@@ -5,7 +5,7 @@ fdsfsdfsd
 fsdfsd
 fsdfsdf
 fsdfsdfsd
-fsdfsd ![Parti 1](#Partie 1)
+fsdfsd [Partie 1](#Partie 1).
 
 # Partie 10
 # Partie 9
