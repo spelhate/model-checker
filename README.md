@@ -9,7 +9,7 @@ fsdfsd
 
 
 
-[Partie 1](#Partie 1)
+[Partie 1](#Partie-1)
 
 # Partie 10
 # Partie 9
